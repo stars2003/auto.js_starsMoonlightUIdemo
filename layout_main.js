@@ -1,6 +1,5 @@
 /**
- * 星辰月光工作室
- *
+ * 星辰月光工作室版权所有
  */
 
 'ui';
@@ -258,7 +257,7 @@ ui.layout(
                                                 <text id="card_about_text1" text="程序版本  " textColor="#161616" marginLeft="3dp"/>
                                                 <frame layout_weight="1">
                                                 </frame>
-                                                <text text="2.5.8" textColor="#7D8592"/>
+                                                <text text="1.0.0" textColor="#7D8592"/>
                                             </horizontal>
                                         </vertical>
                                     </vertical>
@@ -515,19 +514,32 @@ var darkMode=false;
             drawable.setCornerRadius(cornerRadius); // 设置圆角半径
             return drawable;
         }
-        // 设置 input 的背景为圆角
-        var cornerRadius = 20; // 圆角半径
-        var backgroundColor = android.graphics.Color.parseColor("#F4F9FD"); // 背景颜色
-        //ui.userId_input.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));//登录页面-账号输入框
-        ui.input_keyword.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_keyword_value.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_comment_mini.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_comment_max.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_follow_mini.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_follow_max.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        
-        ui.input_commentTime.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
-        ui.input_FollowUpper.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+        inputStyle(20,android.graphics.Color.parseColor("#F4F9FD"),colors.parseColor("#161616"));
+        function inputStyle(Radius,bgcolor,textcolor){
+            // 设置 input 的背景为圆角
+            var cornerRadius = Radius; // 圆角半径
+            var backgroundColor = bgcolor; // 背景颜色
+            //ui.userId_input.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));//登录页面-账号输入框
+            ui.input_keyword.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_keyword_value.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_comment_mini.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_comment_max.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_follow_mini.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_follow_max.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_commentTime.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            ui.input_FollowUpper.setBackgroundDrawable(createRoundedBackground(cornerRadius, backgroundColor));
+            //文本颜色
+            ui.input_keyword.setTextColor(textcolor);
+            ui.input_keyword_value.setTextColor(textcolor);
+            ui.input_comment_mini.setTextColor(textcolor);
+            ui.input_comment_max.setTextColor(textcolor);
+            ui.input_follow_mini.setTextColor(textcolor);
+            ui.input_follow_max.setTextColor(textcolor);
+            ui.input_commentTime.setTextColor(textcolor);
+            ui.input_FollowUpper.setTextColor(textcolor);
+
+        }
+
     //end
 //end
 
@@ -872,28 +884,31 @@ ui.Switch_dark.on("click", () => {
 
     if(darkMode == true){
         log("已开启深色模式");
-         // 检查 Android 版本是否支持导航栏颜色更改（Android 5.0 及以上）
+        //功能：底部导航栏改变颜色
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // 获取当前窗口
             let window = activity.getWindow();
             
             // 设置导航栏颜色
-            let color = android.graphics.Color.parseColor("#21232b");
+            let color = android.graphics.Color.parseColor("#1b1c1e");
             window.setNavigationBarColor(color);
         } else {
             console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
         }
+        //input组件
+        inputStyle(20,android.graphics.Color.parseColor("#38393b"),colors.parseColor("#ffffff"));
+
         //状态栏沉浸
-        ui.statusBarColor(Color.parseColor("#21232b"));
+        ui.statusBarColor(Color.parseColor("#1b1c1e"));
         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE)//设置为沉浸状态栏
         //软件标题以及背景颜色
         ui.appTile.setTextColor(colors.parseColor("#ffffff"));
         ui.appTile_line.setBackgroundColor(colors.parseColor("#515259"));
-        ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#21232b"));
-        ui.page1_bottom.setBackgroundColor(colors.parseColor("#21232b"));
-        ui.page2_bottom.setBackgroundColor(colors.parseColor("#21232b"));
+        ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#1b1c1e"));
+        ui.page1_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
+        ui.page2_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
         //导航
-        ui.navigation.setBackgroundColor(colors.parseColor("#21232b"));
+        ui.navigation.setBackgroundColor(colors.parseColor("#1b1c1e"));
         ui.navigation_line.setBackgroundColor(colors.parseColor("#515259"));
 
         ui.button_viewPage_1_logo.setColorFilter(colors.parseColor("#3F8CFF"));
@@ -906,7 +921,7 @@ ui.Switch_dark.on("click", () => {
         ui.button_viewPage_3_text.setTextColor(colors.parseColor("#ffffff"));
     
         //首页
-        ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#383941"));
+        ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#212325"));
 
         ui.card_softwareSettings_tile1.setTextColor(colors.parseColor("#ffffff"));
         ui.card_softwareSettings_tile2.setTextColor(colors.parseColor("#ffffff"));
@@ -928,7 +943,7 @@ ui.Switch_dark.on("click", () => {
         ui.card_softwareSettings_logo3.setColorFilter(colors.parseColor("#ffffff"));
         ui.card_softwareSettings_logo4.setColorFilter(colors.parseColor("#ffffff"));
         //==
-        ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#383941"));
+        ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#212325"));
 
         ui.card_deviceData_text1.setTextColor(colors.parseColor("#ffffff"));
         ui.card_deviceData_text2.setTextColor(colors.parseColor("#ffffff"));
@@ -945,7 +960,7 @@ ui.Switch_dark.on("click", () => {
         ui.card_deviceData_logo3.setColorFilter(colors.parseColor("#ffffff"));
         ui.card_deviceData_logo4.setColorFilter(colors.parseColor("#ffffff"));
         //==
-        ui.card_about.setCardBackgroundColor(colors.parseColor("#383941"));
+        ui.card_about.setCardBackgroundColor(colors.parseColor("#212325"));
 
         ui.card_about_text1.setTextColor(colors.parseColor("#ffffff"));
         ui.card_about_text2.setTextColor(colors.parseColor("#ffffff"));
@@ -967,7 +982,7 @@ ui.Switch_dark.on("click", () => {
         ui.appConfig.setTextColor(colors.parseColor("#ffffff"));
         ui.appConfig_line.setBackgroundColor(colors.parseColor("#515259"));
         //==
-        ui.card_config1.setCardBackgroundColor(colors.parseColor("#383941"));
+        ui.card_config1.setCardBackgroundColor(colors.parseColor("#212325"));
 
         ui.card_config1_line1.setBackgroundColor(colors.parseColor("#515259"));
         ui.card_config1_line2.setBackgroundColor(colors.parseColor("#515259"));
@@ -976,7 +991,7 @@ ui.Switch_dark.on("click", () => {
         ui.card_config1_text1.setTextColor(colors.parseColor("#ffffff"));
         ui.card_config1_text2.setTextColor(colors.parseColor("#ffffff"));
         //==
-        ui.card_config2.setCardBackgroundColor(colors.parseColor("#383941"));
+        ui.card_config2.setCardBackgroundColor(colors.parseColor("#212325"));
         ui.card_config2_line1.setBackgroundColor(colors.parseColor("#515259"));
         ui.card_config2_line2.setBackgroundColor(colors.parseColor("#515259"));
         //其它页面
@@ -985,17 +1000,19 @@ ui.Switch_dark.on("click", () => {
         ui.other_smiling_face.setColorFilter(colors.parseColor("#ffffff"));
     }else{
         log("已关闭深色模式");
-        // 检查 Android 版本是否支持导航栏颜色更改（Android 5.0 及以上）
+        //功能：底部导航栏改变颜色
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             // 获取当前窗口
             let window = activity.getWindow();
             
             // 设置导航栏颜色（可以替换为你想要的颜色值）
-            let color = android.graphics.Color.parseColor("#ffffff"); // 橙色
+            let color = android.graphics.Color.parseColor("#ffffff"); // 白色
             window.setNavigationBarColor(color);
         } else {
             console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
         }
+        //input组件
+        inputStyle(20,android.graphics.Color.parseColor("#F4F9FD"),colors.parseColor("#161616"));
         //状态栏沉浸
         ui.statusBarColor(Color.parseColor("#F4F9FD"));
         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)//设置为沉浸状态栏
@@ -1150,7 +1167,7 @@ function switch_Animate(RoundObject,Object,isOn){
 
 }
 
-// 检查 Android 版本是否支持导航栏颜色更改（Android 5.0 及以上）
+//功能：底部导航栏改变颜色
 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
     // 获取当前窗口
     let window = activity.getWindow();
@@ -1162,7 +1179,7 @@ if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
     console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
 }
 
-//下面注释是透明导航栏
+//下面注释是透明导航栏代码，如果有这方面需求可以把注释去掉
 /*
 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
     // 获取当前窗口
@@ -1187,3 +1204,117 @@ if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
     console.log("当前设备不支持透明导航栏 (Android 5.0 及以上支持)");
 }
 */
+
+ui.start_button.on("click",()=>{//开始按钮点击事件：运行云端源码，也就是所谓的热更
+    threads.start(function() {
+        let url = "https://www.xcyg.cc/script.js"//运行的云端源码路径
+        let res = http.get(url);
+        let Source = res.body.string();
+        // log(Source)
+        if(res.statusCode==200){
+            threads.start(function(){
+                engines.execScript("script.js", Source,{
+                    delay: 2000,
+                    loopTimes: 3,
+                    interval: 2000});
+                setTimeout(function(){
+                    ui.finish()
+                },1000)
+                
+            })
+        }
+    });
+});
+
+ui.button_backToIndex.on("click",()=>{//退出按钮点击事件
+ exit();
+})
+
+
+ui.button_savaKeyword.on("click",()=>{
+    msgbox("提示","保存成功","好的");
+});
+
+ui.button_savaRisk.on("click",()=>{
+    msgbox("提示","保存成功","好的");
+});
+//导入自定义弹窗
+importClass(Packages.androidx.appcompat.app.AlertDialog);
+importClass(Packages.android.graphics.drawable.GradientDrawable);
+importClass(Packages.android.view.WindowManager);
+function msgbox(title,text,buttonSure_Text,buttonCanel_Text){//自定义对话框函数，方便调用
+    // 创建自定义视图
+    let view = ui.inflate(
+        <vertical gravity="center" padding="20">
+            <text id="msg_title" text="" textSize="18sp" textStyle="bold" textColor="#161616"/>
+            <text id="msg_text" text="" marginTop="5" textSize="15sp" textColor="#7D8592"/>
+            <card id="msg_sure_Button" cardBackgroundColor="#E6EDF5" marginTop="10" foreground="?selectableItemBackground" w="*" h="auto" cardCornerRadius="10dp" cardElevation="0dp">
+                <horizontal padding="10 10 10 10" gravity="center">
+                <text id="msg_sure_ButtonText" text="" textColor="#3F8CFF"/>
+                </horizontal>
+            </card>
+            <card id="msg_cancel_Button" cardBackgroundColor="#E6EDF5" marginTop="10" foreground="?selectableItemBackground" w="*" h="auto" cardCornerRadius="10dp" cardElevation="0dp">
+                <horizontal padding="10 10 10 10" gravity="center">
+                <text id="msg_cancel_ButtonText" text="" textColor="#F65160"/>
+                </horizontal>
+            </card>
+        </vertical>
+    );
+
+
+    if(title==null){
+        view.msg_title.setText("");
+    }else{
+        view.msg_title.setText(title);
+    }
+
+    if(text==null){
+        view.msg_text.setText("");
+    }else{
+        view.msg_text.setText(text);
+    }
+
+    if(buttonSure_Text==null){
+        view.msg_sure_ButtonText.setText("确定");
+    }else{
+        view.msg_sure_ButtonText.setText(buttonSure_Text);
+    }
+    
+    if(buttonCanel_Text==null){
+        view.msg_cancel_ButtonText.setText("取消");
+        view.msg_cancel_Button.visibility=8;
+    }else{
+        view.msg_cancel_ButtonText.setText(buttonCanel_Text);
+    }
+    
+    // 设置圆形背景
+    let background = new GradientDrawable();
+    background.setColor(android.graphics.Color.parseColor("#F4F9FD")); // 背景颜色
+    background.setCornerRadius(40); // 圆形半径
+    view.setBackground(background);
+
+    // 创建对话框
+    var builder = new AlertDialog.Builder(activity);
+    builder.setView(view);
+    var dialog = builder.create();
+
+    // 设置对话框为无边框并显示
+    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    dialog.show();
+
+    // 设置对话框大小为圆形
+    let window = dialog.getWindow();
+    let layoutParams = window.getAttributes();
+    layoutParams.width = device.width-200; // 宽度
+    
+    window.setAttributes(layoutParams);
+
+    view.msg_sure_Button.on("click", ()=>{
+        dialog.dismiss(); // 关闭对话框
+        log("自定义对话框_确定");
+    })
+    view.msg_cancel_Button.on("click", ()=>{
+        dialog.dismiss(); // 关闭对话框
+        log("自定义对话框_取消");
+    })
+};
