@@ -1,3 +1,1 @@
-![image](https://github.com/user-attachments/assets/a6275458-15c6-4d65-8256-9ce05ccf75b7)
-
-![image](https://github.com/user-attachments/assets/e6f1a888-7d5c-4fcb-825d-ddfdcc171e7e)
+![Screenshot_2025-01-15-18-13-08-753_org autojs autojspro](https://github.com/user-attachments/assets/bdb6a9d6-4db1-4688-bef8-dd3e8ab84b31)
