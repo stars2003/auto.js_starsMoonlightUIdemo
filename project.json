@@ -1,0 +1,52 @@
+{
+  "abis": [
+    "arm64-v8a",
+    "armeabi-v7a"
+  ],
+  "assets": [],
+  "build": {
+    "build_id": "AE3A8DA1-3",
+    "build_number": 3,
+    "build_time": 1736957084794,
+    "release": false
+  },
+  "encryptLevel": 3,
+  "features": {
+    "activityIntentTasks": true,
+    "builtInOCR": "with-models",
+    "nodejs": "auto"
+  },
+  "launchConfig": {
+    "displaySplash": true,
+    "hideLogs": false,
+    "splashIcon": "images/ic_splash.png",
+    "splashText": "  ",
+    "stableMode": false
+  },
+  "main": "main.js",
+  "name": "星辰UI模板演示",
+  "optimization": {
+    "obfuscateComponents": false,
+    "removeAccessibilityService": false,
+    "removeOpenCv": false,
+    "unusedResources": false
+  },
+  "packageName": "com.xcyg.xcyg2015116",
+  "permissionConfig": {
+    "requestListOnStartup": [
+      "android.permission.WRITE_EXTERNAL_STORAGE"
+    ]
+  },
+  "plugins": {
+    "org.autojs.autojspro.plugin.mlkit.ocr": "1.1"
+  },
+  "scripts": {},
+  "signingConfig": {
+    "alias": "uidemo",
+    "keystore": "/storage/emulated/0/脚本/.keystore/xcyguidemo.jks",
+    "uuid": "1d1dcffe-61c7-40a8-a839-ecc71dbf2a1a"
+  },
+  "useFeatures": [],
+  "versionCode": 1,
+  "versionName": "1.0.0"
+}

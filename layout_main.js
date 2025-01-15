@@ -1,5 +1,6 @@
 /**
  * 星辰月光工作室版权所有
+ * 更多图标请访问该链接：https://js.design/f/BQ_y1s?p=g_kWkpxMw3&mode=design
  */
 
 'ui';
@@ -388,9 +389,9 @@ ui.layout(
                                         <text id="card_config1_text1" textColor="#161616" text="是否启用某功能1" marginTop="5"/>
                                         <frame layout_weight="1"></frame>
                                         <vertical>
-                                                <card id="Switch_4" w="40" cardBackgroundColor="#CED5E0" cardCornerRadius="13" cardElevation="0dp">
+                                                <card id="Switch_fun1" w="40" cardBackgroundColor="#CED5E0" cardCornerRadius="13" cardElevation="0dp">
                                                     <vertical margin="3 3">
-                                                        <card id="SwitchRound_4" w="20" h="20" cardBackgroundColor="#ffffff" cardCornerRadius="10" cardElevation="0dp">
+                                                        <card id="SwitchRound_fun1" w="20" h="20" cardBackgroundColor="#ffffff" cardCornerRadius="10" cardElevation="0dp">
                                                             <vertical margin="3 3">
                                                                 <text textColor="#ffffff" />
                                                             </vertical>
@@ -406,9 +407,9 @@ ui.layout(
                                         <text id="card_config1_text2" textColor="#161616" text="是否启用某功能2" marginTop="5"/>
                                         <frame layout_weight="1"></frame>
                                         <vertical>
-                                                <card id="Switch_4" w="40" cardBackgroundColor="#CED5E0" cardCornerRadius="13" cardElevation="0dp">
+                                                <card id="Switch_fun2" w="40" cardBackgroundColor="#CED5E0" cardCornerRadius="13" cardElevation="0dp">
                                                     <vertical margin="3 3">
-                                                        <card id="SwitchRound_4" w="20" h="20" cardBackgroundColor="#ffffff" cardCornerRadius="10" cardElevation="0dp">
+                                                        <card id="SwitchRound_fun2" w="20" h="20" cardBackgroundColor="#ffffff" cardCornerRadius="10" cardElevation="0dp">
                                                             <vertical margin="3 3">
                                                                 <text textColor="#ffffff" />
                                                             </vertical>
@@ -502,8 +503,10 @@ ui.layout(
 );
 let switch1_isOn=false;
 let switch2_isOn=false;
-
 var darkMode=false;
+var storage = storages.create("demo_datas");
+
+
 //UI渲染
     //input组件
         importClass(android.graphics.drawable.GradientDrawable);
@@ -542,24 +545,6 @@ var darkMode=false;
 
     //end
 //end
-
-
-
-function readData_userData(){
-    if(userData_userId==undefined||userData_userPassword==undefined){
-        userData.put("userId", "");
-        userData.put("userPassword", "");
-        //===
-        userData_userId=userData.get("userId")
-        userData_userPassword=userData.get("userPassword")
-        log("账号密码存储-账号："+userData_userId)
-        log("账号密码存储-密码："+userData_userPassword)
-    }else{
-        log("账号密码存储-账号："+userData_userId)
-        log("账号密码存储-密码："+userData_userPassword)
-       
-    }
-}
 
 let totalPages = 3;// 总页数
 var currentPage = 1;//当前页面
@@ -881,240 +866,245 @@ if (files.exists("/system/bin/su") || files.exists("/system/xbin/su")) {
 ui.Switch_dark.on("click", () => {
     darkMode = !darkMode;
     switch_Animate(ui.SwitchRound_dark,ui.Switch_dark,darkMode);
-
+    storage.put("darkMode",darkMode);
     if(darkMode == true){
-        log("已开启深色模式");
-        //功能：底部导航栏改变颜色
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            // 获取当前窗口
-            let window = activity.getWindow();
-            
-            // 设置导航栏颜色
-            let color = android.graphics.Color.parseColor("#1b1c1e");
-            window.setNavigationBarColor(color);
-        } else {
-            console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
-        }
-        //input组件
-        inputStyle(20,android.graphics.Color.parseColor("#38393b"),colors.parseColor("#ffffff"));
-
-        //状态栏沉浸
-        ui.statusBarColor(Color.parseColor("#1b1c1e"));
-        activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE)//设置为沉浸状态栏
-        //软件标题以及背景颜色
-        ui.appTile.setTextColor(colors.parseColor("#ffffff"));
-        ui.appTile_line.setBackgroundColor(colors.parseColor("#515259"));
-        ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#1b1c1e"));
-        ui.page1_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
-        ui.page2_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
-        //导航
-        ui.navigation.setBackgroundColor(colors.parseColor("#1b1c1e"));
-        ui.navigation_line.setBackgroundColor(colors.parseColor("#515259"));
-
-        ui.button_viewPage_1_logo.setColorFilter(colors.parseColor("#3F8CFF"));
-        ui.button_viewPage_1_text.setTextColor(colors.parseColor("#3F8CFF"));
-        
-        ui.button_viewPage_2_logo.setColorFilter(colors.parseColor("#ffffff"));
-        ui.button_viewPage_2_text.setTextColor(colors.parseColor("#ffffff"));
-        
-        ui.button_viewPage_3_logo.setColorFilter(colors.parseColor("#ffffff"));
-        ui.button_viewPage_3_text.setTextColor(colors.parseColor("#ffffff"));
-    
-        //首页
-        ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#212325"));
-
-        ui.card_softwareSettings_tile1.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_tile2.setTextColor(colors.parseColor("#ffffff"));
-
-        ui.card_softwareSettings_text1.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_text2.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_text3.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_text4.setTextColor(colors.parseColor("#ffffff"));
-
-        ui.card_softwareSettings_line1.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_softwareSettings_line2.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_softwareSettings_line3.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_softwareSettings_line4.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_softwareSettings_line5.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_softwareSettings_line6.setBackgroundColor(colors.parseColor("#515259"));
-
-        ui.card_softwareSettings_logo1.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_logo2.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_logo3.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_softwareSettings_logo4.setColorFilter(colors.parseColor("#ffffff"));
-        //==
-        ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#212325"));
-
-        ui.card_deviceData_text1.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_deviceData_text2.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_deviceData_text3.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_deviceData_text4.setTextColor(colors.parseColor("#ffffff"));
-        
-        ui.card_deviceData_line1.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_deviceData_line2.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_deviceData_line3.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_deviceData_line4.setBackgroundColor(colors.parseColor("#515259"));
-
-        ui.card_deviceData_logo1.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_deviceData_logo2.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_deviceData_logo3.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_deviceData_logo4.setColorFilter(colors.parseColor("#ffffff"));
-        //==
-        ui.card_about.setCardBackgroundColor(colors.parseColor("#212325"));
-
-        ui.card_about_text1.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_about_text2.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_about_text3.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_about_text4.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_about_text5.setTextColor(colors.parseColor("#ffffff"));
-
-        ui.card_about_line1.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_about_line2.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_about_line3.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_about_line4.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_about_line5.setBackgroundColor(colors.parseColor("#515259"));
-
-        ui.card_about_logo1.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_about_logo2.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_about_logo3.setColorFilter(colors.parseColor("#ffffff"));
-        ui.card_about_logo4.setColorFilter(colors.parseColor("#ffffff"));
-        //配置页面
-        ui.appConfig.setTextColor(colors.parseColor("#ffffff"));
-        ui.appConfig_line.setBackgroundColor(colors.parseColor("#515259"));
-        //==
-        ui.card_config1.setCardBackgroundColor(colors.parseColor("#212325"));
-
-        ui.card_config1_line1.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_config1_line2.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_config1_line3.setBackgroundColor(colors.parseColor("#515259"));
-
-        ui.card_config1_text1.setTextColor(colors.parseColor("#ffffff"));
-        ui.card_config1_text2.setTextColor(colors.parseColor("#ffffff"));
-        //==
-        ui.card_config2.setCardBackgroundColor(colors.parseColor("#212325"));
-        ui.card_config2_line1.setBackgroundColor(colors.parseColor("#515259"));
-        ui.card_config2_line2.setBackgroundColor(colors.parseColor("#515259"));
-        //其它页面
-        ui.appOther.setTextColor(colors.parseColor("#ffffff"));
-        ui.appOther_line.setBackgroundColor(colors.parseColor("#515259"));
-        ui.other_smiling_face.setColorFilter(colors.parseColor("#ffffff"));
+        fun_darkmode();
     }else{
-        log("已关闭深色模式");
-        //功能：底部导航栏改变颜色
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            // 获取当前窗口
-            let window = activity.getWindow();
-            
-            // 设置导航栏颜色（可以替换为你想要的颜色值）
-            let color = android.graphics.Color.parseColor("#ffffff"); // 白色
-            window.setNavigationBarColor(color);
-        } else {
-            console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
-        }
-        //input组件
-        inputStyle(20,android.graphics.Color.parseColor("#F4F9FD"),colors.parseColor("#161616"));
-        //状态栏沉浸
-        ui.statusBarColor(Color.parseColor("#F4F9FD"));
-        activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)//设置为沉浸状态栏
-        //软件标题以及背景颜色
-        ui.appTile.setTextColor(colors.parseColor("#161616"));
-        ui.appTile_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
-        ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.page1_bottom.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.page2_bottom.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        //导航
-        ui.navigation.setBackgroundColor(colors.parseColor("#ffffff"));
-        ui.navigation_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
-
-        ui.button_viewPage_1_logo.setColorFilter(colors.parseColor("#3F8CFF"));
-        ui.button_viewPage_1_text.setTextColor(colors.parseColor("#3F8CFF"));
-        
-        ui.button_viewPage_2_logo.setColorFilter(colors.parseColor("#161616"));
-        ui.button_viewPage_2_text.setTextColor(colors.parseColor("#161616"));
-        
-        ui.button_viewPage_3_logo.setColorFilter(colors.parseColor("#161616"));
-        ui.button_viewPage_3_text.setTextColor(colors.parseColor("#161616"));
-        //首页
-        ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#ffffff"));
-      
-        ui.card_softwareSettings_tile1.setTextColor(colors.parseColor("#161616"));
-        ui.card_softwareSettings_tile2.setTextColor(colors.parseColor("#161616"));
-
-        ui.card_softwareSettings_text1.setTextColor(colors.parseColor("#161616"));
-        ui.card_softwareSettings_text2.setTextColor(colors.parseColor("#161616"));
-        ui.card_softwareSettings_text3.setTextColor(colors.parseColor("#161616"));
-        ui.card_softwareSettings_text4.setTextColor(colors.parseColor("#161616"));
-
-        ui.card_softwareSettings_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_softwareSettings_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_softwareSettings_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_softwareSettings_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_softwareSettings_line5.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_softwareSettings_line6.setBackgroundColor(colors.parseColor("#F4F9FD"));
-
-        ui.card_softwareSettings_logo1.setColorFilter(colors.parseColor("#161616"));
-        ui.card_softwareSettings_logo2.setColorFilter(colors.parseColor("#161616"));
-        ui.card_softwareSettings_logo3.setColorFilter(colors.parseColor("#161616"));
-        ui.card_softwareSettings_logo4.setColorFilter(colors.parseColor("#161616"));
-        //==
-        ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#ffffff"));
-
-        ui.card_deviceData_text1.setTextColor(colors.parseColor("#161616"));
-        ui.card_deviceData_text2.setTextColor(colors.parseColor("#161616"));
-        ui.card_deviceData_text3.setTextColor(colors.parseColor("#161616"));
-        ui.card_deviceData_text4.setTextColor(colors.parseColor("#161616"));
-
-        ui.card_deviceData_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_deviceData_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_deviceData_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_deviceData_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
-
-        ui.card_deviceData_logo1.setColorFilter(colors.parseColor("#161616"));
-        ui.card_deviceData_logo2.setColorFilter(colors.parseColor("#161616"));
-        ui.card_deviceData_logo3.setColorFilter(colors.parseColor("#161616"));
-        ui.card_deviceData_logo4.setColorFilter(colors.parseColor("#161616"));
-        //==
-        ui.card_about.setCardBackgroundColor(colors.parseColor("#ffffff"));
-        ui.card_about_text1.setTextColor(colors.parseColor("#161616"));
-        ui.card_about_text2.setTextColor(colors.parseColor("#161616"));
-        ui.card_about_text3.setTextColor(colors.parseColor("#161616"));
-        ui.card_about_text4.setTextColor(colors.parseColor("#161616"));
-        ui.card_about_text5.setTextColor(colors.parseColor("#161616"));
-
-        ui.card_about_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_about_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_about_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_about_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_about_line5.setBackgroundColor(colors.parseColor("#F4F9FD"));
-
-        ui.card_about_logo1.setColorFilter(colors.parseColor("#161616"));
-        ui.card_about_logo2.setColorFilter(colors.parseColor("#161616"));
-        ui.card_about_logo3.setColorFilter(colors.parseColor("#161616"));
-        ui.card_about_logo4.setColorFilter(colors.parseColor("#161616"));
-
-        //配置页面
-        ui.appConfig.setTextColor(colors.parseColor("#161616"));
-        ui.appConfig_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
-        //==
-        ui.card_config1.setCardBackgroundColor(colors.parseColor("#ffffff"));
-
-        ui.card_config1_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_config1_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_config1_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
-
-        ui.card_config1_text1.setTextColor(colors.parseColor("#161616"));
-        ui.card_config1_text2.setTextColor(colors.parseColor("#161616"));
-        //==
-        ui.card_config2.setCardBackgroundColor(colors.parseColor("#ffffff"));
-        ui.card_config2_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        ui.card_config2_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
-        //其它页面
-        ui.appOther.setTextColor(colors.parseColor("#161616"));
-        ui.appOther_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
-        ui.other_smiling_face.setColorFilter(colors.parseColor("#161616"));
+        fun_undarkmode();
     }
 });
+function fun_darkmode(){
+    log("已开启深色模式");
+    //功能：底部导航栏改变颜色
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        // 获取当前窗口
+        let window = activity.getWindow();
+        
+        // 设置导航栏颜色
+        let color = android.graphics.Color.parseColor("#1b1c1e");
+        window.setNavigationBarColor(color);
+    } else {
+        console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
+    }
+    //input组件
+    inputStyle(20,android.graphics.Color.parseColor("#38393b"),colors.parseColor("#ffffff"));
 
+    //状态栏沉浸
+    ui.statusBarColor(Color.parseColor("#1b1c1e"));
+    activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE)//设置为沉浸状态栏
+    //软件标题以及背景颜色
+    ui.appTile.setTextColor(colors.parseColor("#ffffff"));
+    ui.appTile_line.setBackgroundColor(colors.parseColor("#515259"));
+    ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#1b1c1e"));
+    ui.page1_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
+    ui.page2_bottom.setBackgroundColor(colors.parseColor("#1b1c1e"));
+    //导航
+    ui.navigation.setBackgroundColor(colors.parseColor("#1b1c1e"));
+    ui.navigation_line.setBackgroundColor(colors.parseColor("#515259"));
+
+    ui.button_viewPage_1_logo.setColorFilter(colors.parseColor("#3F8CFF"));
+    ui.button_viewPage_1_text.setTextColor(colors.parseColor("#3F8CFF"));
+    
+    ui.button_viewPage_2_logo.setColorFilter(colors.parseColor("#ffffff"));
+    ui.button_viewPage_2_text.setTextColor(colors.parseColor("#ffffff"));
+    
+    ui.button_viewPage_3_logo.setColorFilter(colors.parseColor("#ffffff"));
+    ui.button_viewPage_3_text.setTextColor(colors.parseColor("#ffffff"));
+
+    //首页
+    ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#212325"));
+
+    ui.card_softwareSettings_tile1.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_tile2.setTextColor(colors.parseColor("#ffffff"));
+
+    ui.card_softwareSettings_text1.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_text2.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_text3.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_text4.setTextColor(colors.parseColor("#ffffff"));
+
+    ui.card_softwareSettings_line1.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_softwareSettings_line2.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_softwareSettings_line3.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_softwareSettings_line4.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_softwareSettings_line5.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_softwareSettings_line6.setBackgroundColor(colors.parseColor("#515259"));
+
+    ui.card_softwareSettings_logo1.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_logo2.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_logo3.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_softwareSettings_logo4.setColorFilter(colors.parseColor("#ffffff"));
+    //==
+    ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#212325"));
+
+    ui.card_deviceData_text1.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_deviceData_text2.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_deviceData_text3.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_deviceData_text4.setTextColor(colors.parseColor("#ffffff"));
+    
+    ui.card_deviceData_line1.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_deviceData_line2.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_deviceData_line3.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_deviceData_line4.setBackgroundColor(colors.parseColor("#515259"));
+
+    ui.card_deviceData_logo1.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_deviceData_logo2.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_deviceData_logo3.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_deviceData_logo4.setColorFilter(colors.parseColor("#ffffff"));
+    //==
+    ui.card_about.setCardBackgroundColor(colors.parseColor("#212325"));
+
+    ui.card_about_text1.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_about_text2.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_about_text3.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_about_text4.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_about_text5.setTextColor(colors.parseColor("#ffffff"));
+
+    ui.card_about_line1.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_about_line2.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_about_line3.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_about_line4.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_about_line5.setBackgroundColor(colors.parseColor("#515259"));
+
+    ui.card_about_logo1.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_about_logo2.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_about_logo3.setColorFilter(colors.parseColor("#ffffff"));
+    ui.card_about_logo4.setColorFilter(colors.parseColor("#ffffff"));
+    //配置页面
+    ui.appConfig.setTextColor(colors.parseColor("#ffffff"));
+    ui.appConfig_line.setBackgroundColor(colors.parseColor("#515259"));
+    //==
+    ui.card_config1.setCardBackgroundColor(colors.parseColor("#212325"));
+
+    ui.card_config1_line1.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_config1_line2.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_config1_line3.setBackgroundColor(colors.parseColor("#515259"));
+
+    ui.card_config1_text1.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_config1_text2.setTextColor(colors.parseColor("#ffffff"));
+    //==
+    ui.card_config2.setCardBackgroundColor(colors.parseColor("#212325"));
+    ui.card_config2_line1.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_config2_line2.setBackgroundColor(colors.parseColor("#515259"));
+    //其它页面
+    ui.appOther.setTextColor(colors.parseColor("#ffffff"));
+    ui.appOther_line.setBackgroundColor(colors.parseColor("#515259"));
+    ui.other_smiling_face.setColorFilter(colors.parseColor("#ffffff"));
+}
+function fun_undarkmode(){
+    log("已关闭深色模式");
+    //功能：底部导航栏改变颜色
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        // 获取当前窗口
+        let window = activity.getWindow();
+        
+        // 设置导航栏颜色（可以替换为你想要的颜色值）
+        let color = android.graphics.Color.parseColor("#ffffff"); // 白色
+        window.setNavigationBarColor(color);
+    } else {
+        console.log("当前设备不支持导航栏颜色更改 (Android 5.0 及以上支持)");
+    }
+    //input组件
+    inputStyle(20,android.graphics.Color.parseColor("#F4F9FD"),colors.parseColor("#161616"));
+    //状态栏沉浸
+    ui.statusBarColor(Color.parseColor("#F4F9FD"));
+    activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)//设置为沉浸状态栏
+    //软件标题以及背景颜色
+    ui.appTile.setTextColor(colors.parseColor("#161616"));
+    ui.appTile_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
+    ui.viewpager_mainPage.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.page1_bottom.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.page2_bottom.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    //导航
+    ui.navigation.setBackgroundColor(colors.parseColor("#ffffff"));
+    ui.navigation_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
+
+    ui.button_viewPage_1_logo.setColorFilter(colors.parseColor("#3F8CFF"));
+    ui.button_viewPage_1_text.setTextColor(colors.parseColor("#3F8CFF"));
+    
+    ui.button_viewPage_2_logo.setColorFilter(colors.parseColor("#161616"));
+    ui.button_viewPage_2_text.setTextColor(colors.parseColor("#161616"));
+    
+    ui.button_viewPage_3_logo.setColorFilter(colors.parseColor("#161616"));
+    ui.button_viewPage_3_text.setTextColor(colors.parseColor("#161616"));
+    //首页
+    ui.card_softwareSettings.setCardBackgroundColor(colors.parseColor("#ffffff"));
+  
+    ui.card_softwareSettings_tile1.setTextColor(colors.parseColor("#161616"));
+    ui.card_softwareSettings_tile2.setTextColor(colors.parseColor("#161616"));
+
+    ui.card_softwareSettings_text1.setTextColor(colors.parseColor("#161616"));
+    ui.card_softwareSettings_text2.setTextColor(colors.parseColor("#161616"));
+    ui.card_softwareSettings_text3.setTextColor(colors.parseColor("#161616"));
+    ui.card_softwareSettings_text4.setTextColor(colors.parseColor("#161616"));
+
+    ui.card_softwareSettings_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_softwareSettings_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_softwareSettings_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_softwareSettings_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_softwareSettings_line5.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_softwareSettings_line6.setBackgroundColor(colors.parseColor("#F4F9FD"));
+
+    ui.card_softwareSettings_logo1.setColorFilter(colors.parseColor("#161616"));
+    ui.card_softwareSettings_logo2.setColorFilter(colors.parseColor("#161616"));
+    ui.card_softwareSettings_logo3.setColorFilter(colors.parseColor("#161616"));
+    ui.card_softwareSettings_logo4.setColorFilter(colors.parseColor("#161616"));
+    //==
+    ui.card_deviceData.setCardBackgroundColor(colors.parseColor("#ffffff"));
+
+    ui.card_deviceData_text1.setTextColor(colors.parseColor("#161616"));
+    ui.card_deviceData_text2.setTextColor(colors.parseColor("#161616"));
+    ui.card_deviceData_text3.setTextColor(colors.parseColor("#161616"));
+    ui.card_deviceData_text4.setTextColor(colors.parseColor("#161616"));
+
+    ui.card_deviceData_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_deviceData_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_deviceData_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_deviceData_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
+
+    ui.card_deviceData_logo1.setColorFilter(colors.parseColor("#161616"));
+    ui.card_deviceData_logo2.setColorFilter(colors.parseColor("#161616"));
+    ui.card_deviceData_logo3.setColorFilter(colors.parseColor("#161616"));
+    ui.card_deviceData_logo4.setColorFilter(colors.parseColor("#161616"));
+    //==
+    ui.card_about.setCardBackgroundColor(colors.parseColor("#ffffff"));
+    ui.card_about_text1.setTextColor(colors.parseColor("#161616"));
+    ui.card_about_text2.setTextColor(colors.parseColor("#161616"));
+    ui.card_about_text3.setTextColor(colors.parseColor("#161616"));
+    ui.card_about_text4.setTextColor(colors.parseColor("#161616"));
+    ui.card_about_text5.setTextColor(colors.parseColor("#161616"));
+
+    ui.card_about_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_about_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_about_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_about_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_about_line5.setBackgroundColor(colors.parseColor("#F4F9FD"));
+
+    ui.card_about_logo1.setColorFilter(colors.parseColor("#161616"));
+    ui.card_about_logo2.setColorFilter(colors.parseColor("#161616"));
+    ui.card_about_logo3.setColorFilter(colors.parseColor("#161616"));
+    ui.card_about_logo4.setColorFilter(colors.parseColor("#161616"));
+
+    //配置页面
+    ui.appConfig.setTextColor(colors.parseColor("#161616"));
+    ui.appConfig_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
+    //==
+    ui.card_config1.setCardBackgroundColor(colors.parseColor("#ffffff"));
+
+    ui.card_config1_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_config1_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_config1_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
+
+    ui.card_config1_text1.setTextColor(colors.parseColor("#161616"));
+    ui.card_config1_text2.setTextColor(colors.parseColor("#161616"));
+    //==
+    ui.card_config2.setCardBackgroundColor(colors.parseColor("#ffffff"));
+    ui.card_config2_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_config2_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    //其它页面
+    ui.appOther.setTextColor(colors.parseColor("#161616"));
+    ui.appOther_line.setBackgroundColor(colors.parseColor("#E6EBF5"));
+    ui.other_smiling_face.setColorFilter(colors.parseColor("#161616"));
+}
 /**
  * 功能：自定义Switch组件动画
  */
@@ -1205,7 +1195,7 @@ if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
 }
 */
 
-ui.start_button.on("click",()=>{//开始按钮点击事件：运行云端源码，也就是所谓的热更
+ui.start_button.on("click",()=>{//开始按钮点击事件：运行云端源码，也就是所谓的热更脚本，把你的脚本源代码放在服务器实现热更
     threads.start(function() {
         let url = "https://www.xcyg.cc/script.js"//运行的云端源码路径
         let res = http.get(url);
@@ -1318,3 +1308,40 @@ function msgbox(title,text,buttonSure_Text,buttonCanel_Text){//自定义对话�
         log("自定义对话框_取消");
     })
 };
+
+readStorage();
+function readStorage(){//读取用户配置
+    darkMode = storage.get("darkMode");//读取深色模式
+    if(darkMode == undefined){
+        storage.put("darkMode", false);
+        darkMode = storage.get("darkMode");
+
+    }
+    darkMode = storage.get("darkMode");
+    console.log("上次用户是否点击过深色模式："+darkMode);
+    if(storage.get("darkMode") == true){//如果上次用户是否点击过深色模式为true
+        fun_darkmode();//渲染深色模式
+        setTimeout(()=>{//延迟0.5秒再渲染是开启状态的自定义switch组件
+            switch_Animate(ui.SwitchRound_dark,ui.Switch_dark,darkMode);
+        },500);
+    }
+
+}
+
+var fun1_isOn = false;
+setTimeout(()=>{
+    switch_Animate(ui.SwitchRound_fun1,ui.Switch_fun1,true);
+    fun1_isOn = true;
+},500);
+ui.Switch_fun1.on("click", () => {
+    fun1_isOn = !fun1_isOn;
+    switch_Animate(ui.SwitchRound_fun1,ui.Switch_fun1,fun1_isOn);
+
+});
+
+var fun2_isOn = false;
+ui.Switch_fun2.on("click", () => {
+    fun2_isOn = !fun2_isOn;
+    switch_Animate(ui.SwitchRound_fun2,ui.Switch_fun2,fun2_isOn);
+
+});
