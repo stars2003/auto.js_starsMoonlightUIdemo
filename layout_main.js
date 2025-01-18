@@ -1,6 +1,7 @@
 /**
  * 星辰月光工作室版权所有
- * 更多图标请访问该链接：https://js.design/f/BQ_y1s?p=g_kWkpxMw3&mode=design
+ * 更多图标请访问该链接：https://js.design/f/BQ_y1s?p=g_kWkpxMw3&mode=design  图标导出请2倍
+ *
  */
 
 'ui';
@@ -418,6 +419,30 @@ ui.layout(
                                                 </card>
                                         </vertical>
                                     </horizontal>
+                                    <horizontal marginTop="10" marginLeft="10">
+                                        <tabs id="card_config1_line4" h="2px" bg="#F4F9FD" w="*"></tabs>
+                                    </horizontal>
+                                    <vertical>
+                                        <text id="card_config1_text3" text="点赞概率" textColor="#161616" marginTop="10" marginLeft="15"/>
+                                        <vertical marginTop="10" marginLeft="15" marginRight="15">
+                                        <linear>
+                                            <text id='text_seekbar_1' textColor="#7D8592" w="50" text="50%" gravity="center" padding="5 0 5 0"/>
+                                            <seekbar id="seekbar_1" progress="50"  layout_weight="1"/>
+                                        </linear>
+                                    </vertical> 
+                                    </vertical>
+                                    <horizontal marginTop="15" marginLeft="10">
+                                        <tabs id="card_config1_line5" h="2px" bg="#F4F9FD" w="*"></tabs>
+                                    </horizontal>
+                                    <vertical>
+                                        <text id="card_config1_text4" text="关注概率" textColor="#161616" marginTop="10" marginLeft="15"/>
+                                        <vertical marginTop="10" marginLeft="15" marginRight="15">
+                                        <linear>
+                                            <text id='text_seekbar_2' textColor="#7D8592" w="50" text="50%" gravity="center" padding="5 0 5 0"/>
+                                            <seekbar id="seekbar_2" progress="50"  layout_weight="1"/>
+                                        </linear>
+                                    </vertical> 
+                                    </vertical>
                                 </vertical>
                                 </vertical>
                             </card>
@@ -460,7 +485,7 @@ ui.layout(
                         <frame h="*">
                             <vertical w="auto" h="auto" layout_gravity="center" marginTop="-100">
                                 <vertical gravity="center">
-                                <img id="other_smiling_face" gravity="center" w="30" h="30" src="https://xcyg.cc/project_data/01/imgs/Smiley.png" tint="#161616" />
+                                <img id="other_smiling_face" gravity="center" w="30" h="30" src="https://xcyg.cc/project_data/01/imgs/Smiley.png" tint="#161616"/>
                                 <text textColor="#7D8592" gravity="center" marginTop="10" text="暂时什么都没有哦"/>
                                 </vertical>
                                 <horizontal marginTop="10">
@@ -978,9 +1003,13 @@ function fun_darkmode(){
     ui.card_config1_line1.setBackgroundColor(colors.parseColor("#515259"));
     ui.card_config1_line2.setBackgroundColor(colors.parseColor("#515259"));
     ui.card_config1_line3.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_config1_line4.setBackgroundColor(colors.parseColor("#515259"));
+    ui.card_config1_line5.setBackgroundColor(colors.parseColor("#515259"));
 
     ui.card_config1_text1.setTextColor(colors.parseColor("#ffffff"));
     ui.card_config1_text2.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_config1_text3.setTextColor(colors.parseColor("#ffffff"));
+    ui.card_config1_text4.setTextColor(colors.parseColor("#ffffff"));
     //==
     ui.card_config2.setCardBackgroundColor(colors.parseColor("#212325"));
     ui.card_config2_line1.setBackgroundColor(colors.parseColor("#515259"));
@@ -1093,9 +1122,13 @@ function fun_undarkmode(){
     ui.card_config1_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
     ui.card_config1_line2.setBackgroundColor(colors.parseColor("#F4F9FD"));
     ui.card_config1_line3.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_config1_line4.setBackgroundColor(colors.parseColor("#F4F9FD"));
+    ui.card_config1_line5.setBackgroundColor(colors.parseColor("#F4F9FD"));
 
     ui.card_config1_text1.setTextColor(colors.parseColor("#161616"));
     ui.card_config1_text2.setTextColor(colors.parseColor("#161616"));
+    ui.card_config1_text3.setTextColor(colors.parseColor("#161616"));
+    ui.card_config1_text4.setTextColor(colors.parseColor("#161616"));
     //==
     ui.card_config2.setCardBackgroundColor(colors.parseColor("#ffffff"));
     ui.card_config2_line1.setBackgroundColor(colors.parseColor("#F4F9FD"));
@@ -1344,4 +1377,34 @@ ui.Switch_fun2.on("click", () => {
     fun2_isOn = !fun2_isOn;
     switch_Animate(ui.SwitchRound_fun2,ui.Switch_fun2,fun2_isOn);
 
+});
+
+$ui.seekbar_1.setOnSeekBarChangeListener({
+    onProgressChanged: (seekbar, progress, fromUser) => {
+       log('第一个滑块条进度: ', progress);
+       ui.text_seekbar_1.setText(String(progress)+"%")
+       
+    },
+});
+$ui.seekbar_2.setOnSeekBarChangeListener({
+    onProgressChanged: (seekbar, progress, fromUser) => {
+       log('第二个滑块条进度: ', progress);
+       ui.text_seekbar_2.setText(String(progress)+"%")
+       
+    },
+});
+
+ui.run(() => {
+    let seekBar1 = ui.seekbar_1;
+    // 修改进度条的颜色
+    seekBar1.getProgressDrawable().setColorFilter(android.graphics.Color.parseColor("#3399ff"), android.graphics.PorterDuff.Mode.SRC_IN);
+    // 修改滑块的颜色
+    seekBar1.getThumb().setColorFilter(android.graphics.Color.parseColor("#3399ff"), android.graphics.PorterDuff.Mode.SRC_IN);
+
+    let seekBar2 = ui.seekbar_2;
+    // 修改进度条的颜色
+    seekBar2.getProgressDrawable().setColorFilter(android.graphics.Color.parseColor("#3399ff"), android.graphics.PorterDuff.Mode.SRC_IN);
+    // 修改滑块的颜色
+    seekBar2.getThumb().setColorFilter(android.graphics.Color.parseColor("#3399ff"), android.graphics.PorterDuff.Mode.SRC_IN); 
+    
 });
