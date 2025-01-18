@@ -1,3 +1,12 @@
+
+更新日志：
+
+2025/1/19：
+
+1.新增对seekbar组件美化，目前只能更改颜色。
+
+2.优化main文件美化
+
 项目介绍：
 这里是一个美化auto.js的UI框架项目，大家都知道AJ自带的原生组件都很丑，所以这方面需求可以试试我这个pojcet，主要目的是为了方便大家快速构建前端项目。
 
@@ -15,7 +24,7 @@
 
 5.按钮（可选带图标）
 
-成品示例：https://www.123pan.com/s/Zh5kjv-ZTUCA
+成品示例：https://www.123pan.com/s/Zh5kjv-zdUCA
 
 截图展示：
 ![Screenshot_2025-01-15-18-13-08-753_org autojs autojspro](https://github.com/user-attachments/assets/2ec0a7c3-1b8c-4aea-9348-e1e5f2504519)
